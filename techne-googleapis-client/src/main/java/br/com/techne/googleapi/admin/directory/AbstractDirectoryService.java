@@ -29,6 +29,8 @@ import com.google.api.services.admin.directory.DirectoryScopes;
  *
  * @see {@link DirectoryScopes}
  *
+ * @see https://developers.google.com/admin-sdk/directory
+ *
  * @author Techne
  * @version 1.0
  * @since 14/06/2016

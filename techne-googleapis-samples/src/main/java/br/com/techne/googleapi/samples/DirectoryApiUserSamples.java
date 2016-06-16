@@ -44,6 +44,9 @@ public class DirectoryApiUserSamples {
 
     // Exemplo listagem de usuários
     //listUsersSample();
+
+    // Exemplo listagem de usuários por givenName query
+    //queryUsersSample();
   }
 
   public static void createUserSample() throws IOException {
@@ -95,7 +98,7 @@ public class DirectoryApiUserSamples {
 
   public static void getUserSample() throws IOException {
 
-    User user = DirectoryUserService.getUser("jose.emanuel@gedu.demo.foreducation.com.br");
+    User user = DirectoryUserService.getUser("techne@gedu.demo.foreducation.com.br");
 
     if(user == null) {
       System.out.println("Usuário não encontrado.");
@@ -141,4 +144,23 @@ public class DirectoryApiUserSamples {
       }
     }
   }
+
+  public static void queryUsersSample() throws IOException {
+    System.out.println("********************** Query users starting with jose.emanuel ********************** ");
+
+    String query = "givenName:'Jose Emanuel*'";
+
+    List<User> users = DirectoryUserService.listUsers(0, query, "familyName");
+
+    if(users == null || users.size() == 0) {
+      System.out.println("Nenhum usuário encontrado.");
+    }
+    else {
+      System.out.println("Usuários:");
+      for(User user : users) {
+        System.out.println(user.getName().getFullName());
+      }
+    }
+  }
+
 }

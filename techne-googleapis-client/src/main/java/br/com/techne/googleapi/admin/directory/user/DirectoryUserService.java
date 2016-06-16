@@ -114,12 +114,16 @@ public class DirectoryUserService extends AbstractDirectoryService {
    * @return List de objetos User.
    * @throws IOException
    */
-  public static List<User> listUsers(int maxResults, String orderBy) throws IOException {
+  public static List<User> listUsers(int maxResults, String query, String orderBy) throws IOException {
 
     com.google.api.services.admin.directory.Directory.Users.List usersListService = service.users().list().setCustomer("my_customer");
 
     if(maxResults > 0){
       usersListService.setMaxResults(maxResults);
+    }
+
+    if(query != null && !"".equals(query)){
+      usersListService.setQuery(query);
     }
 
     if(orderBy != null && !"".equals(orderBy)){
@@ -139,7 +143,7 @@ public class DirectoryUserService extends AbstractDirectoryService {
    */
   public static List<User> listUsersByEmail() throws IOException {
 
-    return listUsers(0, "email");
+    return listUsers(0, "", "email");
   }
 
   /**
@@ -150,7 +154,7 @@ public class DirectoryUserService extends AbstractDirectoryService {
    */
   public static List<User> listUsersByName() throws IOException {
 
-    return listUsers(0, "givenname");
+    return listUsers(0, "", "givenname");
   }
 
   /**
