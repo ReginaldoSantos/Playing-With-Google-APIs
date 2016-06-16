@@ -1,3 +1,13 @@
+# Eclipse Stuff
+.metadata/
+.recommenders/
+bin/
+.settings/
+target/
+.project
+.classpath
+.tomcat/
+
 *.class
 
 # Mobile Tools for Java (J2ME)
