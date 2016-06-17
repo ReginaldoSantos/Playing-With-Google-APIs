@@ -183,4 +183,21 @@ public abstract class AbstractDirectoryService {
                 .build();
   }
 
+  /**
+   * Constrói e retorna um serviço cliente autorizado com as credencias passadas por
+   * parâmetro a Admin SDK Directory.
+   *
+   * Este método pode ser utilizado quando o uso da API não for por linha de comando.
+   *
+   * @return Directory client service autorizado
+   * @throws IOException
+   */
+  protected static Directory getDirectoryService(Credential credential) throws IOException {
+
+    return new Directory
+            .Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
+              .setApplicationName(APPLICATION_NAME)
+                .build();
+  }
+
 }
