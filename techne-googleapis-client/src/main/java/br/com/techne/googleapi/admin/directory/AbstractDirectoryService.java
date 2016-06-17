@@ -1,5 +1,8 @@
 package br.com.techne.googleapi.admin.directory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -45,7 +48,7 @@ public abstract class AbstractDirectoryService {
   /**
    * Nome da Aplicação.
    */
-  private static final String APPLICATION_NAME = "Lyceum - Google Admin SDK";
+  private static final String APPLICATION_NAME = "Techne - Google Admin SDK";
 
   /**
    * Diretório para guardar as "user credentials" para esta aplicação.
@@ -107,6 +110,10 @@ public abstract class AbstractDirectoryService {
      */
     InputStream in = AbstractDirectoryService.class.getResourceAsStream("/client_secret.json");
 
+    if(in == null){
+      in = getResourceAsStreamFromFileSystem();
+    }
+
     GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
     /*
@@ -124,6 +131,40 @@ public abstract class AbstractDirectoryService {
     logger.info(String.format("Credenciais salvas em %s",  DATA_STORE_DIR.getAbsolutePath()));
 
     return credential;
+  }
+
+  /**
+   * Busca pelo arquivo client_secret.json no diretório corrente ou no
+   * diretório informado pela variável ambiente CLIENT_SECRET_JSON_PATH.
+   *
+   * Se encontrado um inputStream é devolvido, caso contrário lança uma
+   * RuntimeException.
+   *
+   * @return client_secret.json inputStream
+   */
+  private static InputStream getResourceAsStreamFromFileSystem() {
+    String filePath = System.getenv("CLIENT_SECRET_JSON_PATH");
+
+    if(filePath == null || "".equals(filePath)){
+      filePath = System.getProperty("user.dir");
+    }
+
+    File file = new File(filePath  + File.separator + "client_secret.json" );
+
+    if (file == null || !file.exists()){
+      logger.info("Para detalhes de como criar as credencias da aplicação veja https://support.google.com/cloud/answer/6158849");
+      throw new RuntimeException("Arquivo client_secret.json não encontrado.");
+    }
+
+    FileInputStream fis;
+    try {
+      fis = new FileInputStream(file);
+    }
+    catch(FileNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+
+    return fis;
   }
 
   /**
