@@ -1,6 +1,7 @@
 package br.com.techne.googleapi.samples;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,9 +21,36 @@ import br.com.techne.googleapi.admin.directory.user.DirectoryUserService;
  */
 public class DirectoryApiUserSamples {
 
+  private static final PrintStream log = System.out;
+
+  private static final String HELP_MSG =
+          "Uso: java -jar techne-googleapis-samples-0.0.1-SNAPSHOT-jar-with-dependencies.jar [-options] \n\n" +
+          "Onde 'options' inclui:\n\n" +
+          "-authenticate        realiza o OAuth2 Authentication Code Flow\n" +
+          "                     (necessário quando se deseja utilizar a api em processos agendados e/ou em lote).\n\n" +
+          "-run                 faz uso da Directory API como implementado.\n" +
+          "                     (realiza o OAuth2 Authentication Code Flow se necessário).\n\n" +
+          "-help                mostra este texto de ajuda.\n\n";
 
   public static void main(String[] args) throws IOException {
 
+    if(args != null && args.length == 1 && "-authenticate".equals((String)args[0])) {
+      log.println("***    Inicializando autenticação OAuth 2.0    ***");
+      DirectoryUserService.authorize();
+      System.exit(0);
+    }
+
+    if(args != null && args.length == 1 && "-run".equals((String)args[0])) {
+      log.println("***    Executando Sample    ***");
+      run();
+      System.exit(0);
+    }
+
+    log.println(HELP_MSG);
+    System.exit(-1);
+  }
+
+  public static void run() throws IOException {
     /*
      * Descomente o método(s) para testar.
      */
@@ -63,10 +91,10 @@ public class DirectoryApiUserSamples {
     User user = DirectoryUserService.createUser(userContent);
 
     if(user == null) {
-      System.out.println("Usuário não incluído.");
+      log.println("Usuário não incluído.");
     }
     else {
-      System.out.println(user.toPrettyString());
+      log.println(user.toPrettyString());
     }
   }
 
@@ -101,14 +129,16 @@ public class DirectoryApiUserSamples {
     User user = DirectoryUserService.getUser("techne@gedu.demo.foreducation.com.br");
 
     if(user == null) {
-      System.out.println("Usuário não encontrado.");
+      log.println("Usuário não encontrado.");
     }
     else {
-      System.out.println(user.toPrettyString());
+      log.println(user.toPrettyString());
     }
   }
 
   public static void updateUserSample() throws IOException {
+
+    log.println("********************** Update User with phone number ********************** ");
 
     UserPhone phone = new UserPhone().setValue("+551121499247").setPrimary(true).setType("work");
 
@@ -118,10 +148,10 @@ public class DirectoryApiUserSamples {
     User user = DirectoryUserService.updateUser("jose.emanuel@gedu.demo.foreducation.com.br", userContent);
 
     if(user == null) {
-      System.out.println("Usuário não incluído.");
+      log.println("Usuário não incluído.");
     }
     else {
-      System.out.println(user.toPrettyString());
+      log.println(user.toPrettyString());
     }
   }
 
@@ -130,35 +160,35 @@ public class DirectoryApiUserSamples {
   }
 
   public static void listUsersSample() throws IOException {
-    System.out.println("********************** Users by email ********************** ");
+    log.println("********************** List Users by email ********************** ");
 
     List<User> users = DirectoryUserService.listUsersByName();
 
     if(users == null || users.size() == 0) {
-      System.out.println("Nenhum usuário encontrado.");
+      log.println("Nenhum usuário encontrado.");
     }
     else {
-      System.out.println("Usuários:");
+      log.println("Usuários:");
       for(User user : users) {
-        System.out.println(user.getName().getFullName());
+        log.println(user.getName().getFullName());
       }
     }
   }
 
   public static void queryUsersSample() throws IOException {
-    System.out.println("********************** Query users starting with jose.emanuel ********************** ");
+    log.println("********************** Query users starting with jose.emanuel ********************** ");
 
     String query = "givenName:'Jose Emanuel*'";
 
     List<User> users = DirectoryUserService.listUsers(0, query, "familyName");
 
     if(users == null || users.size() == 0) {
-      System.out.println("Nenhum usuário encontrado.");
+      log.println("Nenhum usuário encontrado.");
     }
     else {
-      System.out.println("Usuários:");
+      log.println("Usuários:");
       for(User user : users) {
-        System.out.println(user.getName().getFullName());
+        log.println(user.getName().getFullName());
       }
     }
   }

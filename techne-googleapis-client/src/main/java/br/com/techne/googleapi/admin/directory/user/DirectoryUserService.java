@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.batch.BatchRequest;
 import com.google.api.client.googleapis.batch.json.JsonBatchCallback;
 import com.google.api.client.googleapis.json.GoogleJsonError;
@@ -53,6 +54,10 @@ public class DirectoryUserService extends AbstractDirectoryService {
     }
 
     logger.info("***    Directory Service com scope ADMIN_DIRECTORY_USER inicializado.    ***");
+  }
+
+  public static Credential authorize() throws IOException {
+    return AbstractDirectoryService.authorize();
   }
 
   /**
