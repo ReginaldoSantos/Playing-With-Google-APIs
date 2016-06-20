@@ -1,4 +1,4 @@
-package br.com.techne.googleapi.admin.directory;
+package br.com.webnize.googleapis.admin.directory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +34,7 @@ import com.google.api.services.admin.directory.DirectoryScopes;
  *
  * @see https://developers.google.com/admin-sdk/directory
  *
- * @author Techne
+ * @author reginaldo.santos
  * @version 1.0
  * @since 14/06/2016
  */
@@ -48,14 +48,14 @@ public abstract class AbstractDirectoryService {
   /**
    * Nome da Aplicação.
    */
-  private static final String APPLICATION_NAME = "Techne - Google Admin SDK";
+  private static final String APPLICATION_NAME = "Webnize - Google Admin SDK";
 
   /**
    * Diretório para guardar as "user credentials" para esta aplicação.
    */
   private static final java.io.File DATA_STORE_DIR =
         new java.io.File(System.getProperty("user.home"),
-                           ".credentials/techne-google-admin-sdk-v1.json");
+                           ".credentials/googleapis-admin-sdk-v1.json");
 
   /**
    * Instancia global de {@link FileDataStoreFactory}.

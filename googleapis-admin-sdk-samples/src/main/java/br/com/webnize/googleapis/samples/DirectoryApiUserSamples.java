@@ -1,4 +1,4 @@
-package br.com.techne.googleapi.samples;
+package br.com.webnize.googleapis.samples;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -10,12 +10,12 @@ import com.google.api.services.admin.directory.model.User;
 import com.google.api.services.admin.directory.model.UserName;
 import com.google.api.services.admin.directory.model.UserPhone;
 
-import br.com.techne.googleapi.admin.directory.user.DirectoryUserService;
+import br.com.webnize.googleapis.admin.directory.user.DirectoryUserService;
 
 /**
  * Centraliza chamadas aos métodos de exemplos de uso do Directory API Service.
  *
- * @author Techne
+ * @author reginaldo.santos
  * @version 1.0
  * @since 15/06/2016
  */
@@ -24,13 +24,15 @@ public class DirectoryApiUserSamples {
   private static final PrintStream log = System.out;
 
   private static final String HELP_MSG =
-          "Uso: java -jar techne-googleapis-samples-0.0.1-SNAPSHOT-jar-with-dependencies.jar [-options] \n\n" +
+          "Uso: java -jar googleapis-admin-sdk-samples-0.0.1-SNAPSHOT-jar-with-dependencies.jar [-options] \n\n" +
           "Onde 'options' inclui:\n\n" +
           "-authenticate        realiza o OAuth2 Authentication Code Flow\n" +
           "                     (necessário quando se deseja utilizar a api em processos agendados e/ou em lote).\n\n" +
           "-run                 faz uso da Directory API como implementado.\n" +
           "                     (realiza o OAuth2 Authentication Code Flow se necessário).\n\n" +
           "-help                mostra este texto de ajuda.\n\n";
+
+  private static final String ORG_PATH = "/MyOrg";
 
   public static void main(String[] args) throws IOException {
 
@@ -86,7 +88,7 @@ public class DirectoryApiUserSamples {
     userContent.setPrimaryEmail("jose.emanuel@gedu.demo.foreducation.com.br");
     userContent.setPassword("password");
     userContent.setChangePasswordAtNextLogin(true);
-    userContent.setOrgUnitPath("/Techne");
+    userContent.setOrgUnitPath(ORG_PATH);
 
     User user = DirectoryUserService.createUser(userContent);
 
@@ -116,7 +118,7 @@ public class DirectoryApiUserSamples {
       userContent.setPrimaryEmail("jose.emanuel."+ numericVar +"@gedu.demo.foreducation.com.br");
       userContent.setPassword("password");
       userContent.setChangePasswordAtNextLogin(true);
-      userContent.setOrgUnitPath("/Techne");
+      userContent.setOrgUnitPath(ORG_PATH);
 
       userList.add(userContent);
     }
@@ -126,7 +128,7 @@ public class DirectoryApiUserSamples {
 
   public static void getUserSample() throws IOException {
 
-    User user = DirectoryUserService.getUser("techne@gedu.demo.foreducation.com.br");
+    User user = DirectoryUserService.getUser("jose.emanuel@gedu.demo.foreducation.com.br");
 
     if(user == null) {
       log.println("Usuário não encontrado.");
@@ -140,7 +142,7 @@ public class DirectoryApiUserSamples {
 
     log.println("********************** Update User with phone number ********************** ");
 
-    UserPhone phone = new UserPhone().setValue("+551121499247").setPrimary(true).setType("work");
+    UserPhone phone = new UserPhone().setValue("+551112345678").setPrimary(true).setType("work");
 
     User userContent = new User();
     userContent.setPhones(Arrays.asList(phone));

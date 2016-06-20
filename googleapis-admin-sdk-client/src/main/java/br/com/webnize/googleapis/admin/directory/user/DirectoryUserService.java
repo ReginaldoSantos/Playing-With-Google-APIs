@@ -1,4 +1,4 @@
-package br.com.techne.googleapi.admin.directory.user;
+package br.com.webnize.googleapis.admin.directory.user;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import com.google.api.services.admin.directory.DirectoryScopes;
 import com.google.api.services.admin.directory.model.User;
 import com.google.api.services.admin.directory.model.Users;
 
-import br.com.techne.googleapi.admin.directory.AbstractDirectoryService;
+import br.com.webnize.googleapis.admin.directory.AbstractDirectoryService;
 
 /**
  * Implementação de cliente da Google Admin Directory API com scope "ADMIN_DIRECTORY_USER"
@@ -23,7 +23,7 @@ import br.com.techne.googleapi.admin.directory.AbstractDirectoryService;
  *
  * @see {@link DirectoryScopes}
  *
- * @author Techne
+ * @author reginaldo.santos
  * @version 1.0
  * @since 10/06/2016
  */

@@ -2,18 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>br.com.techne</groupId>
-  <artifactId>techne-googleapis-client</artifactId>
+  <groupId>br.com.webnize</groupId>
+  <artifactId>googleapis-admin-sdk-client</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>techne-googleapis-client</name>
-  <url>http://maven.apache.org</url>
-
-  <organization>
-    <name>TECHNE Engenharia de Sistemas</name>
-    <url>http://www.techne.com.br/</url>
-  </organization>
+  <name>googleapis-admin-sdk-client</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,14 +19,7 @@
   </properties>
 
   <dependencies>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-
+  
     <dependency>
       <groupId>com.google.api-client</groupId>
       <artifactId>google-api-client</artifactId>
