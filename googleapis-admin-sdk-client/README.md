@@ -60,6 +60,6 @@ Besides that, after first authentication the credentials are stored at _.credent
 
 #### Headless Authentication
 
-Not possible at all, this is OAuth2.
+Not possible at all, this is OAuth2 code flow.
 But credentials could be copied and pasted between machines.
 
