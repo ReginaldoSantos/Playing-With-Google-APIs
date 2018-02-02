@@ -16,4 +16,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'google-drive'
+rootProject.name = 'googleapis-drive-api-client'
